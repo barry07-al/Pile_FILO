@@ -16,6 +16,18 @@ En https,
 $ git clone https://github.com/barry07-al/Pile_FILO.git
 ```
 
+## Organisation du dépôt
+
+```console
+├── Makefile
+├── README.md
+└── src
+    ├── ThreeStack.py
+    └── ThreeStackTest.py
+
+1 directory, 4 files
+```
+
 ## Ecplication et Exécution
 
 La classe **ThreeStack** est implementée dans le fichier **src/ThreeStack.py**, avec les principales méthodes qui l'accompagne **push**, **pop**, **peek**, qui permettent respectivement d'empiler, de dépiler et d'afficher le sommet d'une pile dont le numéro est donné en paramètre.
