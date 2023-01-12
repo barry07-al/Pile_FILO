@@ -120,7 +120,7 @@ class ThreeStack :
         :return: (int) the top element of the stack
         """
         if self.isEmpty(stackNum):
-            raise IndexError("Stack is empty.")
+            raise Exception("Stack is empty.")
         return self.arrayOfStacks[stackNum-1][-1]
 
     def compare(self, stackNum) :
