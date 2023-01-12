@@ -19,6 +19,7 @@ $ git clone https://github.com/barry07-al/Pile_FILO.git
 ## Organisation du dépôt
 
 ```console
+.
 ├── Makefile
 ├── README.md
 └── src
