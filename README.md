@@ -29,7 +29,7 @@ $ git clone https://github.com/barry07-al/Pile_FILO.git
 1 directory, 4 files
 ```
 
-## Ecplication et Exécution
+## Ecplications et Exécution
 
 La classe **ThreeStack** est implementée dans le fichier **src/ThreeStack.py**, avec les principales méthodes qui l'accompagne **push**, **pop**, **peek**, qui permettent respectivement d'empiler, de dépiler et d'afficher le sommet d'une pile dont le numéro est donné en paramètre.
 
@@ -60,11 +60,11 @@ $ make runTests
 
 **NB** : Dans le fichier de test **src/ThreeStackTest.py**, on teste le bon fonctionnement des fonctions **push** et **pop**.
 
-## Complexité
+## Complexités
 
-**push** : la fonction qui permet d'empiler un element dans une pile, en spécifiant le numéro de la pile dans laquelle on veut empiler l'élément, cette opération est effectuée une seule fois au sommet de la pile, à l'aide de la fonction **getTopIndex**, qui renvoi l'index du sommet de la pile, donc on a une complexité en O(1).
+- **push** : la fonction qui permet d'empiler un element dans une pile, en spécifiant le numéro de la pile dans laquelle on veut empiler l'élément, cette opération est effectuée une seule fois au sommet de la pile, à l'aide de la fonction **getTopIndex**, qui renvoi l'index du sommet de la pile, donc on a une complexité en O(1).
 
-**pop** : cette fonction, qui dépile a une complexité de O(1), car la fonction **del** est appelé une seule fois pour supprimer l'élément à l'indice renvoyé par la fonction **getTopIndex**.
+- **pop** : cette fonction, qui dépile a une complexité de O(1), car la fonction **del** est appelé une seule fois pour supprimer l'élément à l'indice renvoyé par la fonction **getTopIndex**.
 
 ## Autre façon de l'implémenter**
 
