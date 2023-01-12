@@ -1,94 +1,151 @@
 class ThreeStack:
 
     def __init__(self) :
-        self.arrayStacks = []
+        """
+        Initialize the data structure here
+        """
+        self.arrayOfStacks = []
         self.sizesOfStacks = [0, 0, 0]
 
+
+    def getArrayStacks(self) :
+        """
+        :return: the array of stacks
+        """
+        return self.arrayOfStacks
+
+
+    def getSizesOfStacks(self) :
+        """
+        :return: the array of stacks
+        """
+        return self.sizesOfStacks
+
+
+    def getSize(self):
+        """
+        This function returns the number of elements in the array of stacks
+        :return: (int) the number of elements in the array of stacks
+        """
+        return len(self.arrayOfStacks)
+
+
+    def getSizeOfStack(self, stackNum):
+        """
+        This function returns the size of the stack stackNum
+        :param stackNum: (int) the stack number
+        :return: (int) the size of the stack
+        """
+        if self.compare(stackNum) :
+            return self.getSizesOfStacks()[stackNum-1]
+        raise Exception ('Stack number must be between 1 and 3')
+
+
     def isEmpty(self, stackNum):
-        match stackNum :
-            case 1 :
-                return self.sizesOfStacks[0] == 0
-            case 2 :
-                return self.sizesOfStacks[1] == 0
-            case 3 :
-                return self.sizesOfStacks[2] == 0
-            case default :
-                raise Exception ('this stack does not exist')
-        
-    def getTopIndex(self, stackNum):
-        if stackNum == 1 :
-            return 0
-        elif self.arrayStacks != [] and stackNum == 2 or stackNum == 3:
-            return sum(self.sizesOfStacks[:stackNum-1])
-        else :
-            raise Exception ('this stack does not exist or the array of stacks is empty')
+        """
+        This function returns true if the stack is empty or not
+        :param stackNum: (int) the stack number
+        :return: (Boolean) which returns true if the stacknum is empty
+        """
+        if self.compare(stackNum) :
+            return self.getSizesOfStacks()[stackNum-1] == 0
+        raise Exception ('Stack number must be between 1 and 3')
+    
 
     def push(self, stackNum, value) :
-        if stackNum >= 1 and stackNum <= 3 :
-            index = self.getTopIndex(stackNum) # On recupère l'index de debut de la pile numéro stackNUm
-            self.arrayStacks.insert(index, value) # on insère la valeur value à l'index index (sommet de la pile stackNum)
-            self.incremente(stackNum) # Et on incrémente la taille de la pile satckNum de 1
+        """
+        This function adds an element to the top of the stack stackNum
+        :param stackNum: (int) the stack number
+        :param value: (int) the element to add
+        :return: (void) this function returns nothing
+        """
+        if self.compare(stackNum) :
+            index = self.getTopIndex(stackNum) # On recupère l'index du sommet de la pile numéro stackNUm
+            self.arrayOfStacks.insert(index, value) # on insère la valeur value à l'index index (sommet de la pile stackNum)
+            self.getSizesOfStacks()[stackNum-1] += 1 # Et on incrémente la taille de la pile satckNum de 1
         else :
-            raise Exception ('this stack is wrong')
-    
+            raise Exception ('Stack number must be between 1 and 3')
+
+
     def pop(self, stackNum):
+        """
+        This function removes and returns the top element of the stack stackNum
+        :param stackNum: (int) the stack number
+        :return: (int) the top element of the stack
+        """
+        if self.isEmpty(stackNum) :
+            raise Exception ("Stack is empty")
+        elif not self.compare(stackNum) :
+            raise Exception ('Stack number must be between 1 and 3')
+        index = self.getTopIndex(stackNum)
+        value = self.arrayOfStacks[index] # on recupère la valeur du sommet de la pile avant le dépilement (suppression)
+        del self.arrayOfStacks[index] # on dépile
+        self.getSizesOfStacks()[stackNum-1] -= 1
+        return value
+
+
+    def peek(self, stackNum):
+        """
+        This function returns the top element of the stack stackNum
+        :param stackNum: (int) the stack number
+        :return: (int) the top element of the stack
+        """
         if self.isEmpty(stackNum):
             raise Exception ("Stack is empty.")
-        elif stackNum >= 1 and stackNum <= 3 :
-            index = self.getTopIndex(stackNum)
-            value = self.arrayStacks[index]
-            del self.arrayStacks[index]
-            self.decremente(stackNum)
-            return value
-        else :
-            raise Exception ('this stack is wrong')
-    
-    def printArrayStacks(self) :
-        print(self.arrayStacks)
-    
-    def incremente(self, stackNum) : 
-        if stackNum == 1 :
-                self.sizesOfStacks[0] += 1
-        elif stackNum == 2 :
-            self.sizesOfStacks[1] += 1
-        else :
-            self.sizesOfStacks[2] += 1
-    
-    def decremente(self, stackNum) : 
-        if stackNum == 1 :
-            self.sizesOfStacks[0] -= 1
-        elif stackNum == 2 :
-            self.sizesOfStacks[1] -= 1
-        elif stackNum == 3:
-            self.sizesOfStacks[2] -= 1
+        return self.arrayOfStacks[self.getTopIndex(stackNum)-1]
 
-    """
-    def peek(self, stackNum):
-        if self.isEmpty(stackNum):
-            raise ValueError("Stack is empty.")
-        index = self.getTopIndex(stackNum) - 1
-        return self.arrayStacks[index]
-    """
 
-if __name__ == '__main__':
+    def getTopIndex(self, stackNum):
+        """
+        This functon returns the index of the top element of the stack stackNum
+        :param stackNum: (int) the stack number
+        :return: (int) the index of the top element
+        """
+        if self.compare(stackNum) :
+            return sum(self.getSizesOfStacks()[:stackNum-1])
+        raise Exception ('Stack number must be between 1 and 3')
+
+
+    def compare(self, stackNum) :
+        """
+        This function returns true if the stacknum is between 1 and 3 or false otherwise
+        :param stackNum: (int) the stack number
+        :return: (Boolean) which returns true if the stacknum is between 1 and 3 and false otherwise
+        """
+        return 0 < stackNum <= 3
+
+
+    def printStack(self, stackNum):
+        """
+        This function prints the stack number stackNum
+        """
+        if not self.compare(stackNum):
+            raise Exception ("Stack number must be between 1 and 3")
+        indexBeginning = sum(self.sizesOfStacks[:stackNum-1])
+        stack = self.arrayOfStacks[indexBeginning:indexBeginning+self.sizesOfStacks[stackNum-1]]
+        print(f"Stack {stackNum}: {stack}")
+
+
+def createThreeStackExample () :
+    """
+    This function creates an example of a three stack
+    :return: (ThreeStack) this function returns a three stack
+    """
     threeStack = ThreeStack()
-
     threeStack.push(1, "{name:\"object1\"}")
     threeStack.push(1, "{name:\"object2\"}")
-    threeStack.printArrayStacks()
     threeStack.push(2, "{name:\"object3\"}")
     threeStack.push(2, "{name:\"object4\"}")
     threeStack.push(2, "{name:\"object5\"}")
-    threeStack.printArrayStacks()
     threeStack.push(3, "{name:\"object6\"}")
     threeStack.push(3, "{name:\"object7\"}")
-    print('\n')
-    threeStack.printArrayStacks()
-    print('\n')
-    print(threeStack.pop(2)); # display {name:"object5"}
-    print(threeStack.pop(2)); # display {name:"object4"}
-    print(threeStack.pop(1)); # display {name:"object2"}
-    print(threeStack.pop(1)); # display {name:"object1"}
-    print(threeStack.pop(3)); # display {name:"object7"}
-    #print(threeStack.pop(1)); # throw Exception
-    #print(threeStack.pop(4)); # throw Exception
+    return threeStack
+
+
+if __name__ == "__main__":
+    threeStack = createThreeStackExample()
+    print("Array of Stacks : " + str(threeStack.getArrayStacks()))
+    print("Size of Stacks : " + str(threeStack.getSizesOfStacks()))
+    threeStack.printStack(1)
+    threeStack.printStack(2)
+    threeStack.printStack(3)
